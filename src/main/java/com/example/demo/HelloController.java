@@ -1,25 +1,29 @@
 package com.example.demo;
+import com.example.demo.entity.Student;
+import com.example.demo.repository.StudentRepository;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import lombok.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
-import java.util.ArrayList;
 
 @RestController
+@RequestMapping("/api/students")
 public class HelloController {
 
-    @GetMapping("/students")
-    public String getAlldata(){
-        ArrayList<String> students = new ArrayList<>();
-        students.add("Rassel Hassan");
-        students.add("Siam Ahmed");
-        students.add("Efraz khan");
-        students.add("Habibur Rahman");
+    @Autowired
+    StudentRepository studentRepository;
 
-
-        return students.get(1);
+    @GetMapping("/u")
+    public List<Student> getAllStudents(){
+        return studentRepository.findAll();
     }
+
+    @PostMapping
+    public Student createStudent(@Valid @RequestBody Student student){
+        return studentRepository.save(student);
+    }
+
 
 }

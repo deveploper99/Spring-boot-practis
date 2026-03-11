@@ -10,8 +10,6 @@ import java.util.Optional;
 @Repository
 public interface StudentRepository extends JpaRepository<Student,Long> {
 
-    List<Student> findByDepartment (String department);
-    Optional<Student> findByRoll (Integer roll);
 
 
 
