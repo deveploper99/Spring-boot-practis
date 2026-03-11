@@ -1,19 +1,29 @@
 package com.example.demo.entity;
 
+
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.antlr.v4.runtime.misc.NotNull;
 
 @Entity
-@Table(name = "student")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "students")
 public class Student {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "student_name")
+
+    @NotEmpty(message = "name required")
     private String name;
-    private Integer roll;
-    private String department;
+    private int roll;
     private String semister;
-    private double cgpa;
+    private String department;
+    private String email;
+
 }
