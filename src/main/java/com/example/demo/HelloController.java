@@ -1,6 +1,9 @@
 package com.example.demo;
+import com.example.demo.dto.RequestDto;
+import com.example.demo.dto.StudentDTO;
 import com.example.demo.entity.Student;
 import com.example.demo.repository.StudentRepository;
+import com.example.demo.service.StudentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,16 +16,16 @@ import java.util.List;
 public class HelloController {
 
     @Autowired
-    StudentRepository studentRepository;
+    StudentService studentService;
 
     @GetMapping("/u")
-    public List<Student> getAllStudents(){
-        return studentRepository.findAll();
+    public List<StudentDTO> getAllStudent(){
+        return studentService.getAllStudent();
     }
 
     @PostMapping
-    public Student createStudent(@Valid @RequestBody Student student){
-        return studentRepository.save(student);
+    public StudentDTO createStudent(@Valid @RequestBody RequestDto studentDTO){
+        return studentService.saveStudent(studentDTO);
     }
 
 
